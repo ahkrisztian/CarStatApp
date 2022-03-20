@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="CarStatAppUI.MVVM.View.UploadView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarStatAppUI.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="900">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Upload"
+                   Foreground="#F0A500"
+                   FontSize="25"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" Orientation="Horizontal">
+            <TextBox Style="{StaticResource TextBoxStyleBrand}"
+                     Name="brandTextBox"
+                     TextAlignment="Left" HorizontalAlignment="Center"
+                     Margin="0 0 50 0"
+                     />
+
+            <TextBox Style="{StaticResource TextBoxStyleType}"
+                     Name="typeTextBox"
+                     TextAlignment="Left" HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="160,0,0,0" 
+                    VerticalAlignment="Center" Orientation="Horizontal">
+            <Border Width="260" Height="350" Background="#2e231f" CornerRadius="10">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Style="{StaticResource TextBoxHorsePower}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,20,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxTorque}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleTransmission}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxMaxSpeed}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleNullToHundred}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleTrankProducer}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleTrankAdac}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleInteriorNoise}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,160,0"
+                    VerticalAlignment="Center" Orientation="Horizontal">
+            <Border Width="260" Height="350" Background="#2e231f" CornerRadius="10">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <TextBox Style="{StaticResource TextBoxStyleTankCapacity}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,20,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleConsumptionProducer}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleConsumptionAdac}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleConsumptionCity}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleConsumptionCountryRoad}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleConsumptionHighWay}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleRangeAdac}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                        <TextBox Style="{StaticResource TextBoxStyleWeight}"
+                                 HorizontalAlignment="Center"
+                                 Margin="0,0,0,10"/>
+                    </StackPanel>
+                </Grid>
+
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" Orientation="Horizontal">
+
+
+        </StackPanel>
+
+        <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
+                     Click="Upload_Click"
+                     Grid.Row="3"
+                     Width="100"
+                     Margin="0,0,0,0"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center">Upload
+        </Button>
+    </Grid>
+</UserControl>
