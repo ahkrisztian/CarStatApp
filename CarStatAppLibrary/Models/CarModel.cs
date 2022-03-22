@@ -28,7 +28,7 @@ namespace CarStatAppLibrary.Models
         public decimal ConsumptionCountryRoad { get; set; }
         public int RangeAdac { get; set; }
         public decimal InteriorNoise { get; set; }
-        public int TrankAdac{ get; set; }
+        public int TrankAdac { get; set; }
 
     }
 }

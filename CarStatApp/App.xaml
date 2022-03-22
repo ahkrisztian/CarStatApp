@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="ResrouceDictionary/SearchBoxStyle.xaml"/>
                 <ResourceDictionary Source="ResrouceDictionary/TextBoxStlye.xaml"/>
                 <ResourceDictionary Source="ResrouceDictionary/uploadDataTextBox.xaml"/>
+                <ResourceDictionary Source="ResrouceDictionary/CarRecommStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
@@ -26,6 +27,16 @@
                 <view:UploadView/>
             </DataTemplate>
 
+            <ControlTemplate x:Key="errorTemplate">
+                <Border BorderBrush="OrangeRed" BorderThickness="0">
+                    <Grid>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
+                                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                                   Margin="0,0,4,0"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

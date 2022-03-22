@@ -4,18 +4,75 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarStatAppUI.MVVM.View"
+             xmlns:viewModel="clr-namespace:CarStatAppUI.MVVM.ViewModel"
+             xmlns:valid="clr-namespace:CarStatAppUI.Core.Rules"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="Filter"
+             d:DesignHeight="450" d:DesignWidth="900">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+  
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2">
+            <TextBlock Text="Recommend Me A Car"
+                       Foreground="#F0A500"
+                       FontSize="25"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Label Grid.Row="1" Grid.Column="0" Content="Choose a maximum Interior Noise Level:"
+                   HorizontalAlignment="Left"
                    Foreground="#F0A500"
-                   FontSize="25"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
-        
-        <TextBox Width="250" Height="40" VerticalAlignment="Center"
-                     HorizontalAlignment="Left" Margin="90,0,0,0"
-                     Grid.Column="1" Style="{StaticResource SearchTextBox }"/>
-        
-    </StackPanel>
+                   FontSize="15"
+                   Margin="60,30,0,0"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Choose a minimum Range:"
+                   HorizontalAlignment="Left"
+                   Foreground="#F0A500"
+                   FontSize="15"
+                   Margin="60,30,0,0"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Choose a minimum trunk volume:"
+                   HorizontalAlignment="Left"
+                   Foreground="#F0A500"
+                   FontSize="15"
+                   Margin="60,30,0,0"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Choose a maximal consumption:"
+                   HorizontalAlignment="Left"
+                   Foreground="#F0A500"
+                   FontSize="15"
+                   Margin="60,30,0,0"/>
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left"
+                    VerticalAlignment="Center" Margin="0,50,0,0">
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20" Style="{StaticResource NoiseTextBox}">
+            </TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource RangeTextBox}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource TrunkTextBox}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource MaxConsTextBox}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
+                    VerticalAlignment="Center">
+            <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
+                     Grid.Row="3"
+                     Width="100"
+                     Height="40"
+                     Margin="0,0,0,0"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center">Search
+            </Button>
+        </StackPanel>
+    </Grid>
 </UserControl>
