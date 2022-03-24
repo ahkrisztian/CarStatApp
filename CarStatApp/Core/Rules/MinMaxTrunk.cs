@@ -8,29 +8,29 @@ using System.Windows.Controls;
 
 namespace CarStatAppUI.Core.Rules
 {
-    public class MinMaxNoiseRule : ValidationRule
+    public  class MinMaxTrunk : ValidationRule
     {
-        public int MinNoise = 60;
-        public int MaxNoise = 80;
+        public int MinValue = 100;
+        public int MaxValue = 1500;
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             try
             {
-                if (Convert.ToInt32(value) < MinNoise)
+                if (Convert.ToInt32(value) < MinValue)
                 {
-                    return new ValidationResult(false, $"Noise level too low.");
+                    return new ValidationResult(false, $"Trunk volume is too low.");
                 }
 
-                if (Convert.ToInt32(value) > MaxNoise)
+                if (Convert.ToInt32(value) > MaxValue)
                 {
-                    return new ValidationResult(false, $"Noise level too high.");
+                    return new ValidationResult(false, $"Trunk volume is too high.");
                 }
             }
             catch (Exception)
             {
 
-                return new ValidationResult(false, $"Please enter a valid noise level");
+                return new ValidationResult(false, $"Please enter a valid trunk volume");
             }
 
             return new ValidationResult(true, null);

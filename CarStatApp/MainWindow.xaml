@@ -18,12 +18,10 @@
 
     <Border Background="#4A3933" CornerRadius="10">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
             <Grid Background="#1B1A17">
@@ -36,8 +34,7 @@
                        FontSize="30">
                 </TextBlock>
 
-                <Button Grid.Column="1"
-                    Style="{StaticResource ButtonStyle}" 
+                <Button Style="{StaticResource ButtonStyle}" 
                     x:Name="Exit"
                     HorizontalAlignment="Right"
                     Margin="0,0,5,0"
@@ -66,12 +63,21 @@
                 </StackPanel>
             </Grid>
 
-            
+            <Grid Background="#1B1A17" Grid.Row="2">
+                <TextBlock Text="This App is based on Der Allgemeine Deutsche Automobil-Club e. V Tests"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Foreground="#F0A500"
+                           FontWeight="SemiBold"
+                           FontSize="15"/>
+            </Grid>
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="10"
                             Content="{Binding CurrentView}"/>
+            
+            
 
         </Grid>
     </Border>

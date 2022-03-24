@@ -10,7 +10,7 @@ namespace CarStatAppLibrary.Models
     {
         public string Brand { get; set; }
         public string Type { get; set; }
-        public List<string> Specification { get; set; }
-        public List<string> MeasuredValuesAdac { get; set; }
+        public List<string> Specification { get; set; } = new List<string>();
+        public List<string> MeasuredValuesAdac { get; set; } = new List<string>();
     }
 }

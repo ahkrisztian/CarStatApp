@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:valid="clr-namespace:CarStatAppUI.Core.Rules">
 
     <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyleBrand">
         <Setter Property="Template">
@@ -99,13 +100,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="HorsePower" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Horse Power"
                                        VerticalAlignment="Center"
@@ -142,13 +151,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Torque" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Torque"
                                        VerticalAlignment="Center"
@@ -228,13 +245,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="MaxSpeed" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Max. Speed"
                                        VerticalAlignment="Center"
@@ -271,13 +296,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="NullHundred" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="0-100"
                                        VerticalAlignment="Center"
@@ -314,13 +347,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TrunkCapProd" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Trank Cap. Prod."
                                        VerticalAlignment="Center"
@@ -357,13 +398,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TankCap" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Tank Capacity"
                                        VerticalAlignment="Center"
@@ -400,13 +449,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsProd" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Consumption Producer"
                                        VerticalAlignment="Center"
@@ -443,13 +500,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Consumption ADAC"
                                        VerticalAlignment="Center"
@@ -486,13 +551,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsCity" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Consumption City"
                                        VerticalAlignment="Center"
@@ -529,13 +602,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsHighWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Consumption HighWay"
                                        VerticalAlignment="Center"
@@ -572,13 +653,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsCountry" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Consumption CountryRoad"
                                        VerticalAlignment="Center"
@@ -615,13 +704,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="IntNoise" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Interior Noise"
                                        VerticalAlignment="Center"
@@ -658,15 +755,23 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TrunkCapAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
-                                       Text="Trank Cap. ADAC"
+                                       Text="Trunk Cap. ADAC"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
@@ -701,13 +806,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="RangeAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Range ADAC"
                                        VerticalAlignment="Center"
@@ -744,13 +857,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="SearchBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Weight" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <TextBlock IsHitTestVisible="False"
                                        Text="Weight"
                                        VerticalAlignment="Center"

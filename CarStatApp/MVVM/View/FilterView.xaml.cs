@@ -23,6 +23,8 @@ namespace CarStatAppUI.MVVM.View
         public FilterView()
         {
             InitializeComponent();
+
         }
+
     }
 }

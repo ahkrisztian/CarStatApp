@@ -8,37 +8,12 @@ using System.Threading.Tasks;
 
 namespace CarStatAppUI.MVVM.ViewModel
 {
-    public class FilterViewModel : ObservObj, IDataErrorInfo
-    {
-        public string Error { get { return null; } }
+    public class FilterViewModel : ObservObj
+    {   
 
-        public Dictionary<string, string> Errors { get; private set; } = new Dictionary<string, string>();
+        private string _consumptionAdac;
 
-        public string this[string columnName]
-        {
-            get
-            {
-                string result = null;
-
-                switch (columnName)
-                {
-                    case "InteriorNoise":
-                        result = CheckNoiseLevel();
-                        break;
-                }
-
-                if (Errors.ContainsKey(columnName)) { Errors[columnName] = result; }
-                else if (result != null) { Errors.Add(columnName, result); }
-
-                OnPropertyChanged("Errors");
-                return result;
-
-            }
-        }
-
-        private decimal _consumptionAdac;
-
-        public decimal ConsumptionAdac
+        public string ConsumptionAdac
         {
             get { return _consumptionAdac; }
             set
@@ -49,9 +24,9 @@ namespace CarStatAppUI.MVVM.ViewModel
             }
         }
 
-        private decimal _interiorNoise;
+        private string _interiorNoise;
 
-        public decimal InteriorNoise
+        public string InteriorNoise
         {
             get { return _interiorNoise; }
             set
@@ -63,8 +38,8 @@ namespace CarStatAppUI.MVVM.ViewModel
         }
 
 
-        private int _trankAdac;
-        public int TrankAdac
+        private string _trankAdac;
+        public string TrankAdac
         {
             get { return _trankAdac; }
             set
@@ -75,8 +50,8 @@ namespace CarStatAppUI.MVVM.ViewModel
             }
         }
 
-        private int _rangeAdac;
-        public int RangeAdac
+        private string _rangeAdac;
+        public string RangeAdac
         {
             get { return _rangeAdac; }
             set
@@ -85,20 +60,6 @@ namespace CarStatAppUI.MVVM.ViewModel
                 _rangeAdac = value;
                 OnPropertyChanged();
             }
-        }
-
-        internal string CheckNoiseLevel()
-        {
-            if (InteriorNoise > 80)
-            {
-                return $"Noise level too high";
-            }
-            if (InteriorNoise < 60)
-            {
-                return $"Noise level too low";
-            }
-
-            return string.Empty;
         }
     }
 }

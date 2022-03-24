@@ -29,7 +29,7 @@
                             </TextBox>
 
                             <TextBlock IsHitTestVisible="False"
-                                       Text="Min. Range"
+                                       Text="Min. Noise"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
@@ -69,12 +69,12 @@
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"
+                                 x:Name="RangeBox"
                                  Validation.ErrorTemplate="{DynamicResource errorTemplate}">
                                 <TextBox.Text>
-                                    <Binding Path="InteriorNoise" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding Path="RangeAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <valid:MinMaxNoiseRule/>
+                                            <valid:MinMaxRange/>
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
@@ -93,7 +93,7 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=RangeBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -118,13 +118,21 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{TemplateBinding Text}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="TrunkBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TrankAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:MinMaxTrunk/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
 
                             <TextBlock IsHitTestVisible="False"
                                        Text="Min. Trunk Volume"
@@ -137,7 +145,7 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                            <DataTrigger Binding="{Binding Text, ElementName=TrunkBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -162,15 +170,23 @@
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
-                                 Text="{TemplateBinding Text}"
                                  BorderThickness="0"
                                  Background="Transparent"
                                  VerticalAlignment="Center"
                                  Padding="5"
                                  Foreground="#4A3933"
-                                 x:Name="SearchBox"/>
+                                 x:Name="ConsBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsumptionAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:MinMaxConsumption/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
 
-                            <TextBlock IsHitTestVisible="False"
+                                <TextBlock IsHitTestVisible="False"
                                        Text="Max. Consumption"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
@@ -181,7 +197,7 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=ConsBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

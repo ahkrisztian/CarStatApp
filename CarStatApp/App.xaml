@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="ResrouceDictionary/TextBoxStlye.xaml"/>
                 <ResourceDictionary Source="ResrouceDictionary/uploadDataTextBox.xaml"/>
                 <ResourceDictionary Source="ResrouceDictionary/CarRecommStyle.xaml"/>
+                <ResourceDictionary Source="ResrouceDictionary/ErrorTemplateStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
