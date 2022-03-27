@@ -4,55 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarStatAppUI.MVVM.View"
+             xmlns:viewModel="clr-namespace:CarStatAppUI.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="160"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0"
-                     Style="{StaticResource SearchTextBox}"/>
 
-        <StackPanel Grid.Row="2"
+        <StackPanel Grid.Row="1"
                     VerticalAlignment="Center" Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Style="{StaticResource ButtonStyle}"
+                     x:Name="QuietestButton"
+                     Click="QuietestButton_Click"
+                     FontSize="11"
                      Grid.Row="3"
                      Width="150"
-                     Height="150"
-                     Margin="0,0,0,0"
-                     VerticalAlignment="Center">The Quietest Car
-            </Button>
+                     Height="150"/>
             <Button Style="{StaticResource ButtonStyle}"
+                     x:Name="LongestRange"
+                     Click="LongestRange_Click"
                      Width="150"
                      Height="150"
                      Margin="20,0,0,0"
-                     VerticalAlignment="Center">Longest Range
-            </Button>
+                     FontSize="11"/>
             <Button Style="{StaticResource ButtonStyle}"
+                     x:Name="BiggestTrunk"
+                     Click="BiggestTrunk_Click"
                      Width="150"
                      Height="150"
                      Margin="20,0,0,0"
-                     VerticalAlignment="Center">The biggest tank
-            </Button>
+                     FontSize="11"/>
             <Button Style="{StaticResource ButtonStyle}"
+                     x:Name="BestEco"
+                     Click="BestEco_Click"
                      Width="150"
                      Height="150"
                      Margin="20,0,0,0"
-                     VerticalAlignment="Center">Most economical car
-            </Button>
+                     FontSize="11"/>
         </StackPanel>
 
-        <Border Width="650" Height="200" Background="#2e231f" CornerRadius="10"
-                    Grid.Row="1">
-            <TextBlock Text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-                       TextAlignment="Left" 
-                       TextWrapping="Wrap" 
+        <Border Width="650" Height="300" Background="#2e231f" CornerRadius="10">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                <TextBlock TextWrapping="Wrap"
+                       x:Name="HomeTextBlock"
+                       Text="Hello"
+                       FontSize="17"
+                       FontWeight="SemiBold"
                        VerticalAlignment="Center"
-                       Foreground="#F0A500"/>
+                       Foreground="#F0A500"
+                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>
+            </ScrollViewer>
 
         </Border>
     </Grid>

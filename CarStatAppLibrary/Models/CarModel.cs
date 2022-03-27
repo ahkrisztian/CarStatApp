@@ -10,14 +10,14 @@ namespace CarStatAppLibrary.Models
     {
         public int Id { get; set; }
         public string Brand { get; set; }
-        public string Type { get; set; }
+        public string CarType { get; set; }
 
-        public decimal HorsePower { get; set; }
-        public decimal Torque { get; set; }
+        public int HorsePower { get; set; }
+        public int Torque { get; set; }
         public string Transmission { get; set; }
         public int MaxSpeed { get; set; }
         public decimal NullToHundred { get; set; }
-        public int TrankProducer { get; set; }
+        public int TrunkProducer { get; set; }
         public int TankCapacity { get; set; }
         public int Weight { get; set; }
 
@@ -28,7 +28,31 @@ namespace CarStatAppLibrary.Models
         public decimal ConsumptionCountryRoad { get; set; }
         public int RangeAdac { get; set; }
         public decimal InteriorNoise { get; set; }
-        public int TrankAdac { get; set; }
+        public int TrunkAdac { get; set; }
+
+        public CarModel()
+        {
+
+        }
+
+        public string PrintCar() =>
+            $"Brand: {Brand}\n" +
+            $"Type: {CarType}\n" +
+            $"HorsePower: {HorsePower} HP\n" +
+            $"Torque: {Torque} Nm\n" +
+            $"Transmission: {Transmission}\n" +
+            $"Max. Speed: {MaxSpeed} km/h\n" +
+            $"0-100: {NullToHundred} s\n" +
+            $"Trunk Capacity (Producer): {TrunkProducer} l\n" +
+            $"Trunk Capacity (ADAC): {TrunkAdac} l\n" +
+            $"Weight: {Weight} kg\n" +
+            $"Avg. Consumption (Producer): {ConsumptionProducer} l/100km\n" +
+            $"Avg. Consumption (ADAC): {ConsumptionAdac} l/100km\n" +
+            $"Avg. Consumption in City: {ConsumptionCity} l/100km\n" +
+            $"Avg. Consumption on HighWay: {ConsumptionHighWay} l/100km\n" +
+            $"Avg. Consumption on Country Roads: {ConsumptionCountryRoad} l/100km\n" +
+            $"Max. Range (ADAC): {RangeAdac} km\n" +
+            $"Interior Noise by 130 km/h: {InteriorNoise} dB\n";
 
     }
 }
