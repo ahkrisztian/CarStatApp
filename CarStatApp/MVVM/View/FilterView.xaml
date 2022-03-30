@@ -53,15 +53,24 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left"
                     VerticalAlignment="Center" Margin="0,50,0,0">
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20" Style="{StaticResource NoiseTextBox}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource RangeTextBox}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource TrunkTextBox}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   Style="{StaticResource MaxConsTextBox}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
+                     Style="{StaticResource NoiseTextBox}"
+                     Name="noiseTextBox"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
+                     Style="{StaticResource RangeTextBox}"
+                     Name="rangeTextBox"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
+                     Style="{StaticResource TrunkTextBox}"
+                     Name="trunkTextBox"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
+                     Style="{StaticResource MaxConsTextBox}"
+                     Name="consTextBox"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
                     VerticalAlignment="Center">
             <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
+                    Click="Upload_Click"
                      Grid.Row="3"
                      Width="100"
                      Height="40"

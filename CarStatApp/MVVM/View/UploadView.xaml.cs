@@ -1,5 +1,7 @@
 ﻿using CarStatAppLibrary.DataAccess;
 using CarStatAppLibrary.Models;
+using CarStatAppUI.Core;
+using CarStatAppUI.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +23,10 @@ namespace CarStatAppUI.MVVM.View
     /// Interaction logic for UploadView.xaml
     /// </summary>
     public partial class UploadView : UserControl
-    {
+    {        
         public UploadView()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         private (bool isValid, CarModel model) ValidateForm()
@@ -44,14 +46,14 @@ namespace CarStatAppUI.MVVM.View
                 model.NullToHundred = Convert.ToDecimal(nulltohundredTextBox.Text);
                 model.TrunkProducer = Convert.ToInt32(trunkProdTextBox.Text);
                 model.TankCapacity = Convert.ToInt32(tankCapTextBox.Text);
-                model.Weight = Convert.ToInt32(weightTextBox.Text);
+                //model.Weight = Convert.ToInt32(weightTextBox.Text);
                 model.ConsumptionProducer = Convert.ToDecimal(consProdTextBox.Text);
                 model.ConsumptionAdac = Convert.ToDecimal(consAdacTextBox.Text);
                 model.ConsumptionCity = Convert.ToDecimal(consCityTextBox.Text);
                 model.ConsumptionHighWay = Convert.ToDecimal(consHighWayTextBox.Text);
                 model.ConsumptionCountryRoad = Convert.ToDecimal(consCountryTextBox.Text);
                 model.RangeAdac = Convert.ToInt32(rangeTextBox.Text);
-                model.InteriorNoise = Convert.ToDecimal(noiseTextBox.Text);
+                //model.InteriorNoise = Convert.ToDecimal(noiseTextBox.Text);
                 model.TrunkAdac = Convert.ToInt32(trunkAdacTextBox.Text);
         }
             catch (Exception)
@@ -86,14 +88,14 @@ namespace CarStatAppUI.MVVM.View
                 {"@NullToHundred", nulltohundredTextBox.Text },
                 {"@TrunkProducer", trunkProdTextBox.Text },
                 {"@TankCapacity", tankCapTextBox.Text },
-                {"@Weight", weightTextBox.Text },
+                //{"@Weight", weightTextBox.Text },
                 {"@ConsumptionProducer", consProdTextBox.Text },
                 {"@ConsumptionAdac", consAdacTextBox.Text },
                 {"@ConsumptionCity", consCityTextBox.Text },
                 {"@ConsumptionHighWay", consHighWayTextBox.Text },
                 {"@ConsumptionCountryRoad", consCountryTextBox.Text },
                 {"@RangeAdac", rangeTextBox.Text },
-                {"@InteriorNoise", noiseTextBox.Text },
+                //{"@InteriorNoise", noiseTextBox.Text },
                 {"@TrunkAdac", trunkAdacTextBox.Text }
             };
 
@@ -103,8 +105,7 @@ namespace CarStatAppUI.MVVM.View
 
         private void Upload_Click(object sender, RoutedEventArgs e)
         {
-            SaveToDatabase();
-
+            MessageBox.Show(horseTextBox.Text.ToString());
             //var form = ValidateForm();
 
             //if(form.isValid)

@@ -42,7 +42,7 @@
                         <TextBox Style="{StaticResource TextBoxHorsePower}"
                                  HorizontalAlignment="Center"
                                  Name="horseTextBox"
-                                 Margin="0,20,0,10"/>
+                                 Margin="0,20,0,10" />
                         <TextBox Style="{StaticResource TextBoxTorque}"
                                  HorizontalAlignment="Center"
                                  Name="torqueTextBox"

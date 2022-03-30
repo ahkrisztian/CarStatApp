@@ -8,7 +8,6 @@
                     <Border CornerRadius="10"
                             Background="#F0A500"
                             Width="350" Height="40">
-
                         <Grid>
                             <Rectangle StrokeThickness="1"/>
                             <TextBox Margin="1"
@@ -19,7 +18,6 @@
                                  Padding="5"
                                  Foreground="#4A3933"
                                  x:Name="SearchBox"/>
-
                             <TextBlock IsHitTestVisible="False"
                                        Text="Search"
                                        VerticalAlignment="Center"
@@ -27,7 +25,6 @@
                                        Margin="10,0,0,0"
                                        Foreground="#4A3933"
                                        Grid.Column="1">
-
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
