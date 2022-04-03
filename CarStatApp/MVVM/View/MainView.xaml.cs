@@ -28,22 +28,14 @@ namespace CarStatAppUI.MVVM.View
         private void LoadDefaultsMostsFromDatabase()
         {
 
-            string sqlQuietest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE InteriorNoise = (SELECT MIN(InteriorNoise) FROM Car)";
-            string sqlLongest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE RangeAdac = (SELECT MAX(RangeAdac) FROM Car)";
-            string sqlBiggest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE TrunkAdac = (SELECT MAX(TrunkAdac) FROM Car)";
-            string sqlEco = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE ConsumptionAdac = (SELECT MIN(ConsumptionAdac) FROM Car)";
+            List<CarModel> models = SqliteDataAccess.GetMostEffCars();
 
             try
             {
-                carQuietest = SqliteDataAccess.LoadData<CarModel>(sqlQuietest, new Dictionary<string, object>()).FirstOrDefault();
-                carLongest = SqliteDataAccess.LoadData<CarModel>(sqlLongest, new Dictionary<string, object>()).FirstOrDefault();
-                carBiggest = SqliteDataAccess.LoadData<CarModel>(sqlBiggest, new Dictionary<string, object>()).FirstOrDefault();
-                carEco = SqliteDataAccess.LoadData<CarModel>(sqlEco, new Dictionary<string, object>()).FirstOrDefault();
-
-                QuietestButton.Content = $"The Quietest Car:\n {carQuietest.Brand} {carQuietest.CarType}\n Interior noise level: {carQuietest.InteriorNoise} dB";
-                LongestRange.Content = $"Car with the longest range:\n {carLongest.Brand} {carLongest.CarType}\n Range: {carLongest.RangeAdac} km";
-                BiggestTrunk.Content = $"Car with the biggest trunk:\n {carBiggest.Brand} {carBiggest.CarType}\n Trunk volume: {carBiggest.TrunkAdac} l";
-                BestEco.Content = $"Most fuel-efficient car:\n {carEco.Brand} {carEco.CarType}\n Average consumption:\n {carEco.ConsumptionAdac} l/100km";
+                QuietestButton.Content = $"The Quietest Car:\n {models[0].Brand} {models[0].CarType}\n Interior noise level: {models[0].InteriorNoise} dB";
+                LongestRange.Content = $"Car with the longest range:\n {models[1].Brand} {models[1].CarType}\n Range: {models[1].RangeAdac} km";
+                BiggestTrunk.Content = $"Car with the biggest trunk:\n {models[2].Brand} {models[2].CarType}\n Trunk volume: {models[2].TrunkAdac} l";
+                BestEco.Content = $"Most fuel-efficient car:\n {models[3].Brand} {models[3].CarType}\n Average consumption:\n {models[3].ConsumptionAdac} l/100km";
             }
             catch
             {

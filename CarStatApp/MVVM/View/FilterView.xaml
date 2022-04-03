@@ -70,7 +70,7 @@
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2"
                     VerticalAlignment="Center">
             <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
-                    Click="Upload_Click"
+                    Click="Search_Click"
                      Grid.Row="3"
                      Width="100"
                      Height="40"

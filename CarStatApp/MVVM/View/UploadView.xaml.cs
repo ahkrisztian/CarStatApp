@@ -46,14 +46,14 @@ namespace CarStatAppUI.MVVM.View
                 model.NullToHundred = Convert.ToDecimal(nulltohundredTextBox.Text);
                 model.TrunkProducer = Convert.ToInt32(trunkProdTextBox.Text);
                 model.TankCapacity = Convert.ToInt32(tankCapTextBox.Text);
-                //model.Weight = Convert.ToInt32(weightTextBox.Text);
+                model.Weight = Convert.ToInt32(weightTextBox.Text);
                 model.ConsumptionProducer = Convert.ToDecimal(consProdTextBox.Text);
                 model.ConsumptionAdac = Convert.ToDecimal(consAdacTextBox.Text);
                 model.ConsumptionCity = Convert.ToDecimal(consCityTextBox.Text);
                 model.ConsumptionHighWay = Convert.ToDecimal(consHighWayTextBox.Text);
                 model.ConsumptionCountryRoad = Convert.ToDecimal(consCountryTextBox.Text);
                 model.RangeAdac = Convert.ToInt32(rangeTextBox.Text);
-                //model.InteriorNoise = Convert.ToDecimal(noiseTextBox.Text);
+                model.InteriorNoise = Convert.ToDecimal(noiseTextBox.Text);
                 model.TrunkAdac = Convert.ToInt32(trunkAdacTextBox.Text);
         }
             catch (Exception)
@@ -65,58 +65,19 @@ namespace CarStatAppUI.MVVM.View
             return (isValid, model);
 
         }
-
-        private void SaveToDatabase()
-        {
-            string sql = "INSERT INTO Car (CarBrand, CarType, HorsePower, Torque, " +
-                "Transmission, MaxSpeed, NullToHundred, TrunkProducer, TankCapacity, Weight, " +
-                "ConsumptionProducer, ConsumptionAdac, ConsumptionCity, ConsumptionHighWay," +
-                "ConsumptionCountryRoad, RangeAdac, InteriorNoise, TrunkAdac)" +
-                " VALUES (@CarBrand, @CarType, @HorsePower, @Torque, " +
-                "@Transmission, @MaxSpeed, @NullToHundred, @TrunkProducer, @TankCapacity, @Weight, " +
-                "@ConsumptionProducer, @ConsumptionAdac, @ConsumptionCity, @ConsumptionHighWay," +
-                "@ConsumptionCountryRoad, @RangeAdac, @InteriorNoise, @TrunkAdac)";
-
-            Dictionary<string, object> parameters = new Dictionary<string, object> 
-            {
-                {"@CarBrand", brandTextBox.Text },
-                {"@CarType", typeTextBox.Text },
-                {"@HorsePower", horseTextBox.Text },
-                {"@Transmission", transmissionTextBox.Text },
-                {"@Torque", torqueTextBox.Text },
-                {"@MaxSpeed", maxSpeedTextBox.Text },
-                {"@NullToHundred", nulltohundredTextBox.Text },
-                {"@TrunkProducer", trunkProdTextBox.Text },
-                {"@TankCapacity", tankCapTextBox.Text },
-                //{"@Weight", weightTextBox.Text },
-                {"@ConsumptionProducer", consProdTextBox.Text },
-                {"@ConsumptionAdac", consAdacTextBox.Text },
-                {"@ConsumptionCity", consCityTextBox.Text },
-                {"@ConsumptionHighWay", consHighWayTextBox.Text },
-                {"@ConsumptionCountryRoad", consCountryTextBox.Text },
-                {"@RangeAdac", rangeTextBox.Text },
-                //{"@InteriorNoise", noiseTextBox.Text },
-                {"@TrunkAdac", trunkAdacTextBox.Text }
-            };
-
-            SqliteDataAccess.SaveData(sql, parameters);
-
-        }
-
         private void Upload_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(horseTextBox.Text.ToString());
-            //var form = ValidateForm();
+            var form = ValidateForm();
 
-            //if(form.isValid)
-            //{
-            //    SaveToDatabase();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("The form is not valid.");
-            //    return;
-            //}
+            if (form.isValid)
+            {
+                SqliteDataAccess.CarModel_SaveToDb(form.model);
+            }
+            else
+            {
+                MessageBox.Show("The form is not valid.");
+                return;
+            }
         }
     }
 }

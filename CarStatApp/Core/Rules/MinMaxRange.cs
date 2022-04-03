@@ -20,18 +20,12 @@ namespace CarStatAppUI.Core.Rules
             try
             {
                 //Load a car with a minimum range
-                string sqlRangeMin = "SELECT * FROM Car WHERE RangeAdac = (SELECT MIN(RangeAdac) FROM Car)";
 
-                CarModel minRangeModel = SqliteDataAccess.LoadData<CarModel>(sqlRangeMin, new Dictionary<string, object>()).FirstOrDefault();
-
-                MinRange = minRangeModel.RangeAdac;
+                MinRange = SqliteDataAccess.GetMinRange();
 
                 //Load a car with a maximum range
-                string sqlRangeMax = "SELECT* FROM Car WHERE RangeAdac = (SELECT MAX(RangeAdac) FROM Car)";
 
-                CarModel maxRangeModel = SqliteDataAccess.LoadData<CarModel>(sqlRangeMax, new Dictionary<string, object>()).FirstOrDefault();
-
-                MaxRange = maxRangeModel.RangeAdac;
+                MaxRange = SqliteDataAccess.GetMaxRange();
 
                 if (Convert.ToInt32(value) < MinRange)
                 {

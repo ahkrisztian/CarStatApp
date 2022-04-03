@@ -20,18 +20,10 @@ namespace CarStatAppUI.Core.Rules
             try
             {
                 //Load a car with a minimum interior noise level
-                string sqlinteriorMin = "SELECT* FROM Car WHERE InteriorNoise = (SELECT MIN(InteriorNoise) FROM Car)";
-
-                CarModel mininteriorModel = SqliteDataAccess.LoadData<CarModel>(sqlinteriorMin, new Dictionary<string, object>()).FirstOrDefault();
-
-                MinNoise = mininteriorModel.InteriorNoise;
+                MinNoise = SqliteDataAccess.GetMinNoise();
 
                 //Load a car with a maximum interior noise level
-                string sqlinteriorMax = "SELECT* FROM Car WHERE InteriorNoise = (SELECT MAX(InteriorNoise) FROM Car)";
-
-                CarModel maxinteriorModel = SqliteDataAccess.LoadData<CarModel>(sqlinteriorMax, new Dictionary<string, object>()).FirstOrDefault();
-
-                MaxNoise = maxinteriorModel.InteriorNoise;
+                MaxNoise = SqliteDataAccess.GetMaxNoise();
 
                 if (Convert.ToInt32(value) < MinNoise)
                 {

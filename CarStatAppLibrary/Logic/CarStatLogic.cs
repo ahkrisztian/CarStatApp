@@ -19,57 +19,57 @@ namespace CarStatAppLibrary.Logic
 
         public List<CarModel> filterCarModel(decimal noise, decimal consumption, int range, int trunk)
         {
-            throw new NotImplementedException();
+             return _dataAccess.GetFilteredCarModel(noise, consumption, range, trunk);
         }
 
         public List<CarModel> LoadDefaultsMostsFromDatabase()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMostEffCars();
         }
 
         public List<CarModel> ListofCars()
         {
-            throw new NotImplementedException();
+            return _dataAccess.CarInventory_GetCars();
         }
 
         public decimal MaxConsumption()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMaxConsumption();
         }
 
         public decimal MaxNoise()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMaxNoise();
         }
 
         public int MaxRange()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMaxRange();
         }
 
         public int MaxTrunk()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMaxTrunk();
         }
 
         public decimal MinConsumption()
         {
-            throw new NotImplementedException();
+           return _dataAccess.GetMinConsumption();
         }
 
         public decimal MinNoise()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMinNoise();
         }
 
         public int MinRange()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMinRange();
         }
 
         public int MinTrunk()
         {
-            throw new NotImplementedException();
+            return _dataAccess.GetMinTrunk();
         }
 
         public void SaveCarToDatabase(CarModel car)

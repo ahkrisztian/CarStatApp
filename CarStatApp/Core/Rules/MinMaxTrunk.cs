@@ -20,18 +20,12 @@ namespace CarStatAppUI.Core.Rules
             try
             {
                 //Load a car with a minimum trunk volume
-                string sqlTrunkMin = "SELECT* FROM Car WHERE TrunkAdac = (SELECT MIN(TrunkAdac) FROM Car)";
 
-                CarModel minTrunkModel = SqliteDataAccess.LoadData<CarModel>(sqlTrunkMin, new Dictionary<string, object>()).FirstOrDefault();
-
-                MinValue = minTrunkModel.TrunkAdac;
+                MinValue = SqliteDataAccess.GetMinTrunk();
 
                 //Load a car with a maximum trunk volume
-                string sqlTrunkMax = "SELECT* FROM Car WHERE TrunkAdac = (SELECT MAX(TrunkAdac) FROM Car)";
 
-                CarModel maxTrunkModel = SqliteDataAccess.LoadData<CarModel>(sqlTrunkMax, new Dictionary<string, object>()).FirstOrDefault();
-
-                MaxValue = maxTrunkModel.TrunkAdac;
+                MaxValue = SqliteDataAccess.GetMaxTrunk();
 
                 if (Convert.ToInt32(value) < MinValue)
                 {

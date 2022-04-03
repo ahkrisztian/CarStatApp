@@ -73,7 +73,7 @@ namespace CarStatAppxUnit.Mocks
                 HorsePower = 312,
                 NullToHundred = 4.05M,
                 Id = 3,
-                InteriorNoise = 68.75M,
+                InteriorNoise = 69.25M,
                 MaxSpeed = 256,
                 RangeAdac = 578,
                 Torque = 365,
@@ -95,7 +95,7 @@ namespace CarStatAppxUnit.Mocks
 
         public List<CarModel> GetFilteredCarModel(decimal noise, decimal consumption, int range, int trunk)
         {
-            var cars =  CarDb.Where(x => x.InteriorNoise <= noise && x.ConsumptionAdac <= consumption && x.RangeAdac <= range && x.TrunkAdac <= trunk).ToList();
+            var cars =  CarDb.Where(x => x.InteriorNoise >= noise && x.ConsumptionAdac >= consumption && x.RangeAdac >= range && x.TrunkAdac >= trunk).ToList();
 
             return cars;
         }
@@ -107,7 +107,7 @@ namespace CarStatAppxUnit.Mocks
 
         public decimal GetMaxNoise()
         {
-            return CarDb.Max(x => x.ConsumptionAdac);
+            return CarDb.Max(x => x.InteriorNoise);
         }
 
         public int GetMaxRange()
@@ -145,21 +145,21 @@ namespace CarStatAppxUnit.Mocks
             List<CarModel> cars = new List<CarModel>();
 
 
-            List<CarModel> carQuietest = CarDb.Where(x => x.InteriorNoise == CarDb.Min(y => y.InteriorNoise)).ToList();
+            CarModel carQuietest = CarDb.Where(x => x.InteriorNoise == CarDb.Min(y => y.InteriorNoise)).FirstOrDefault();
 
-            cars.Add(carQuietest[0]);
+            cars.Add(carQuietest);
 
-            List<CarModel> carLongest = CarDb.Where(x => x.RangeAdac == CarDb.Max(y => y.RangeAdac)).ToList();
+            CarModel carLongest = CarDb.Where(x => x.RangeAdac == CarDb.Max(y => y.RangeAdac)).FirstOrDefault();
 
-            cars.Add(carLongest[0]);
+            cars.Add(carLongest);
 
-            List<CarModel> carBiggest = CarDb.Where(x => x.TrunkAdac == CarDb.Max(y => y.TrunkAdac)).ToList();
+            CarModel carBiggest = CarDb.Where(x => x.TrunkAdac == CarDb.Max(y => y.TrunkAdac)).FirstOrDefault();
 
-            cars.Add(carBiggest[0]);
+            cars.Add(carBiggest);
 
-            List<CarModel> carEco = CarDb.Where(x => x.ConsumptionAdac == CarDb.Min(y => y.ConsumptionAdac)).ToList();
+            CarModel carEco = CarDb.Where(x => x.ConsumptionAdac == CarDb.Min(y => y.ConsumptionAdac)).FirstOrDefault();
 
-            cars.Add(carEco[0]);
+            cars.Add(carEco);
 
             return cars;
         }

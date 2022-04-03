@@ -28,16 +28,23 @@ namespace CarStatAppUI.MVVM.View
             InitializeComponent();
         }
 
-        private void Upload_Click(object sender, RoutedEventArgs e)
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
             //Load a car with filter options
-            string sqlfilterCar = $"SELECT * FROM Car Where " +
-                $"ConsumptionAdac > {consTextBox.Text} AND " +
-                $"InteriorNoise > {noiseTextBox.Text} AND " +
-                $"RangeAdac > {rangeTextBox.Text} AND " +
-                $"TrunkAdac > {trunkTextBox.Text}";
+            Decimal.TryParse(consTextBox.Text, out decimal consumption);
+            Decimal.TryParse(noiseTextBox.Text, out decimal noise);
+            int.TryParse(rangeTextBox.Text, out int range);
+            int.TryParse(trunkTextBox.Text, out int trunk);
 
-            CarModel filterCar = SqliteDataAccess.LoadData<CarModel>(sqlfilterCar, new Dictionary<string, object>()).FirstOrDefault();
+            List<CarModel> models = SqliteDataAccess.GetFilteredCarModel(noise, consumption, range, trunk);
+
+            //string sqlfilterCar = $"SELECT * FROM Car Where " +
+            //    $"ConsumptionAdac > {consTextBox.Text} AND " +
+            //    $"InteriorNoise > {noiseTextBox.Text} AND " +
+            //    $"RangeAdac > {rangeTextBox.Text} AND " +
+            //    $"TrunkAdac > {trunkTextBox.Text}";
+
+            //CarModel filterCar = SqliteDataAccess.LoadData<CarModel>(sqlfilterCar, new Dictionary<string, object>()).FirstOrDefault();
         }
 
     }

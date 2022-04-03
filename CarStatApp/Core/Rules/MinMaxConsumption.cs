@@ -28,18 +28,11 @@ namespace CarStatAppUI.Core.Rules
             try
             {
                 //Load car with the lowest consumption
-                string sqlconsMin = "SELECT * FROM Car WHERE ConsumptionAdac = (SELECT MIN(ConsumptionAdac) FROM Car)";
-
-                CarModel minConModel = SqliteDataAccess.LoadData<CarModel>(sqlconsMin, new Dictionary<string, object>()).FirstOrDefault();
-
-                minCons = minConModel.ConsumptionAdac;
+                minCons = SqliteDataAccess.GetMinConsumption();
 
                 //Load a car with a highest consumption
-                string sqlconsMax = "SELECT * FROM Car WHERE ConsumptionAdac = (SELECT MAX(ConsumptionAdac) FROM Car)";
 
-                CarModel maxConModel = SqliteDataAccess.LoadData<CarModel>(sqlconsMax, new Dictionary<string, object>()).FirstOrDefault();
-
-                maxCons = maxConModel.ConsumptionAdac;
+                maxCons = SqliteDataAccess.GetMaxConsumption();
 
                 if (Convert.ToInt32(value) < minCons)
                 {
