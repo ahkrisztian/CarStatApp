@@ -1,43 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarStatAppLibrary.DataAccess;
+using CarStatAppLibrary.Models;
 using CarStatAppUI.Core;
+using CarStatAppUI.MVVM.View;
 
 namespace CarStatAppUI.MVVM.ViewModel
 {
-    public class HomeViewModel : ObservObj
+    public class RecommendViewModel : ObservObj
     {
+        
+        private static ObservableCollection<CarModel> _models { get; set; }
 
-        private string _carQuietest;
-
-        public string CarQuietest
+        public ObservableCollection<CarModel> Models
         {
             get
             {
-                return _carQuietest;
+                return _models;
             }
             set
             {
-                if (value == _carQuietest) return;
-                _carQuietest = value;
+                if (value == _models) return;
+                _models = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _carEco;
+        public RecommendViewModel()
+        {
 
-        public string CarEco
+        }
+
+        private bool _search;
+        public bool Search
         {
             get
             {
-                return _carEco;
+                return _search;
             }
             set
             {
-                if (value == _carEco) return;
-                _carEco = value;
+                if (value == _search) return;
+                _search = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _consumptionAdac;
+
+        public string ConsumptionAdac
+        {
+            get
+            {
+                return _consumptionAdac;
+            }
+            set
+            {
+                if (value == _consumptionAdac) return;
+                _consumptionAdac = value;
                 OnPropertyChanged();
             }
         }
@@ -57,6 +81,7 @@ namespace CarStatAppUI.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
 
         private string _trankAdac;
         public string TrankAdac
@@ -88,18 +113,18 @@ namespace CarStatAppUI.MVVM.ViewModel
             }
         }
 
-        private string _carDetail;
+        private List<CarModel> _cars;
 
-        public string CarDetail
+        public List<CarModel> Cars
         {
             get
             {
-                return _carDetail;
+                return _cars;
             }
             set
             {
-                if (value == _carDetail) return;
-                _carDetail = value;
+                if (value == _cars) return;
+                _cars = value;
                 OnPropertyChanged();
             }
         }

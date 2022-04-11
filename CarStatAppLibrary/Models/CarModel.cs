@@ -8,13 +8,13 @@ namespace CarStatAppLibrary.Models
 {
     public class CarModel
     {
-        public int Id { get; set; }
+        public int carId { get; set; }
         public string Brand { get; set; }
         public string CarType { get; set; }
 
         public int HorsePower { get; set; }
         public int Torque { get; set; }
-        public string Transmission { get; set; }
+        public string TypeTransmission { get; set; }
         public int MaxSpeed { get; set; }
         public decimal NullToHundred { get; set; }
         public int TrunkProducer { get; set; }
@@ -30,17 +30,25 @@ namespace CarStatAppLibrary.Models
         public decimal InteriorNoise { get; set; }
         public int TrunkAdac { get; set; }
 
+        public string DisplayValue
+        {
+            get
+            {
+                return $"{Brand}  {CarType}";
+            }
+        }
         public CarModel()
         {
 
         }
+
 
         public string PrintCar() =>
             $"Brand: {Brand}\n" +
             $"Type: {CarType}\n" +
             $"HorsePower: {HorsePower} HP\n" +
             $"Torque: {Torque} Nm\n" +
-            $"Transmission: {Transmission}\n" +
+            $"Transmission: {TypeTransmission}\n" +
             $"Max. Speed: {MaxSpeed} km/h\n" +
             $"0-100: {NullToHundred} s\n" +
             $"Trunk Capacity (Producer): {TrunkProducer} l\n" +

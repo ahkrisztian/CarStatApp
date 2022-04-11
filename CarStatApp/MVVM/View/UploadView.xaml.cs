@@ -41,7 +41,7 @@ namespace CarStatAppUI.MVVM.View
                 model.CarType = typeTextBox.Text;
                 model.HorsePower = int.Parse(horseTextBox.Text);
                 model.Torque = int.Parse(torqueTextBox.Text);
-                model.Transmission = transmissionTextBox.Text;
+                model.TypeTransmission = transmissionTextBox.Text;
                 model.MaxSpeed = Convert.ToInt32(maxSpeedTextBox.Text);
                 model.NullToHundred = Convert.ToDecimal(nulltohundredTextBox.Text);
                 model.TrunkProducer = Convert.ToInt32(trunkProdTextBox.Text);

@@ -1,8 +1,11 @@
 ﻿using CarStatAppLibrary.Models;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,7 @@ namespace CarStatAppLibrary.DataAccess
 {
     public static class SqliteDataAccess
     {
+
         public static List<T> LoadData<T>(string sqlStatement, Dictionary<string, object> parameters, string connectionName = "Car")
         {
             DynamicParameters p = parameters.ToDynamicParameters();
@@ -47,7 +51,10 @@ namespace CarStatAppLibrary.DataAccess
         {
             string sql = "SELECT * FROM Car";
 
-            return LoadData<CarModel>(sql, new Dictionary<string, object>()).ToList();
+            List<CarModel> cars = LoadData<CarModel>(sql, new Dictionary<string, object>());
+
+            return cars;
+
         }
 
         public static void CarModel_SaveToDb(CarModel car)
@@ -67,7 +74,7 @@ namespace CarStatAppLibrary.DataAccess
                 {"@CarBrand", car.Brand },
                 {"@CarType", car.CarType },
                 {"@HorsePower", car.HorsePower },
-                {"@Transmission", car.Transmission },
+                {"@Transmission", car.TypeTransmission },
                 {"@Torque", car.Torque },
                 {"@MaxSpeed", car.MaxSpeed },
                 {"@NullToHundred", car.NullToHundred },
@@ -89,13 +96,23 @@ namespace CarStatAppLibrary.DataAccess
 
         public static List<CarModel> GetFilteredCarModel(decimal noise, decimal consumption, int range, int trunk)
         {
-            string sqlfilterCar = $"SELECT * FROM Car Where " +
-                $"ConsumptionAdac > {consumption} AND " +
-                $"InteriorNoise > {noise} AND " +
-                $"RangeAdac > {range} AND " +
-                $"TrunkAdac > {trunk}";
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                {"@ConsumptionAdac", consumption},
+                {"@InteriorNoise", noise },
+                {"@RangeAdac", range},
+                {"@TrunkAdac", trunk }
+            };
 
-            return LoadData<CarModel>(sqlfilterCar, new Dictionary<string, object>()).ToList();
+            string sqlFilter = @"SELECT * FROM Car 
+                                 INNER JOIN Brands ON Car.CarBrand = Brands.id 
+                                 INNER JOIN TransmissionType ON Car.Transmission = TransmissionType.id    
+                                 WHERE InteriorNoise > @InteriorNoise AND ConsumptionAdac > @ConsumptionAdac 
+                                 AND RangeAdac > @RangeAdac AND TrunkAdac > @TrunkAdac;";
+
+            var data = LoadData<CarModel>(sqlFilter, parameters);
+
+            return data;
         }
 
         public static decimal GetMaxConsumption()
@@ -111,7 +128,7 @@ namespace CarStatAppLibrary.DataAccess
         {
             string sqlinteriorMax = "SELECT* FROM Car WHERE InteriorNoise = (SELECT MAX(InteriorNoise) FROM Car)";
 
-            CarModel maxinteriorModel = SqliteDataAccess.LoadData<CarModel>(sqlinteriorMax, new Dictionary<string, object>()).FirstOrDefault();
+            CarModel maxinteriorModel = LoadData<CarModel>(sqlinteriorMax, new Dictionary<string, object>()).FirstOrDefault();
 
             return maxinteriorModel.InteriorNoise;
         }
@@ -120,7 +137,7 @@ namespace CarStatAppLibrary.DataAccess
         {
             string sqlRangeMax = "SELECT* FROM Car WHERE RangeAdac = (SELECT MAX(RangeAdac) FROM Car)";
 
-            CarModel maxRangeModel = LoadData<CarModel>(sqlRangeMax, new Dictionary<string, object>()).FirstOrDefault();
+            CarModel maxRangeModel = SqliteDataAccess.LoadData<CarModel>(sqlRangeMax, new Dictionary<string, object>()).FirstOrDefault();
 
             return maxRangeModel.RangeAdac;
         }
@@ -156,7 +173,7 @@ namespace CarStatAppLibrary.DataAccess
         {
             string sqlRangeMin = "SELECT * FROM Car WHERE RangeAdac = (SELECT MIN(RangeAdac) FROM Car)";
 
-            CarModel minRangeModel = LoadData<CarModel>(sqlRangeMin, new Dictionary<string, object>()).FirstOrDefault();
+            CarModel minRangeModel = SqliteDataAccess.LoadData<CarModel>(sqlRangeMin, new Dictionary<string, object>()).FirstOrDefault();
 
             return minRangeModel.RangeAdac;
         }
@@ -174,17 +191,18 @@ namespace CarStatAppLibrary.DataAccess
         {
             List<CarModel> list = new List<CarModel>();
 
-            string sqlQuietest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE InteriorNoise = (SELECT MIN(InteriorNoise) FROM Car)";
-            string sqlLongest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE RangeAdac = (SELECT MAX(RangeAdac) FROM Car)";
-            string sqlBiggest = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE TrunkAdac = (SELECT MAX(TrunkAdac) FROM Car)";
-            string sqlEco = "SELECT * FROM Car INNER JOIN Brands ON Car.CarBrand = Brands.id WHERE ConsumptionAdac = (SELECT MIN(ConsumptionAdac) FROM Car)";
+            string sqlQuietest = "SELECT * FROM Car LEFT JOIN Brands ON Car.CarBrand = Brands.id WHERE InteriorNoise = (SELECT MIN(InteriorNoise) FROM Car)";
+            string sqlLongest = "SELECT * FROM Car LEFT JOIN Brands ON Car.CarBrand = Brands.id WHERE RangeAdac = (SELECT MAX(RangeAdac) FROM Car)";
+            string sqlBiggest = "SELECT * FROM Car LEFT JOIN Brands ON Car.CarBrand = Brands.id WHERE TrunkAdac = (SELECT MAX(TrunkAdac) FROM Car)";
+            string sqlEco = "SELECT * FROM Car LEFT JOIN Brands ON Car.CarBrand = Brands.id WHERE ConsumptionAdac = (SELECT MIN(ConsumptionAdac) FROM Car)";
 
-            list.Add(LoadData<CarModel>(sqlQuietest, new Dictionary<string, object>()).FirstOrDefault());
-            list.Add(LoadData<CarModel>(sqlLongest, new Dictionary<string, object>()).FirstOrDefault());
-            list.Add(LoadData<CarModel>(sqlBiggest, new Dictionary<string, object>()).FirstOrDefault());
-            list.Add(LoadData<CarModel>(sqlEco, new Dictionary<string, object>()).FirstOrDefault());
+            list.Add(SqliteDataAccess.LoadData<CarModel>(sqlQuietest, new Dictionary<string, object>()).FirstOrDefault());
+            list.Add(SqliteDataAccess.LoadData<CarModel>(sqlLongest, new Dictionary<string, object>()).FirstOrDefault());
+            list.Add(SqliteDataAccess.LoadData<CarModel>(sqlBiggest, new Dictionary<string, object>()).FirstOrDefault());
+            list.Add(SqliteDataAccess.LoadData<CarModel>(sqlEco, new Dictionary<string, object>()).FirstOrDefault());
 
             return list;
         }
+
     }
 }

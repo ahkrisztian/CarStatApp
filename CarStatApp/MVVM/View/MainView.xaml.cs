@@ -14,6 +14,8 @@ namespace CarStatAppUI.MVVM.View
     /// </summary>
     public partial class MainView : UserControl
     {
+        List<CarModel> models = new List<CarModel>();
+
         CarModel carQuietest = new CarModel();
         CarModel carLongest = new CarModel();
         CarModel carBiggest = new CarModel();
@@ -22,13 +24,11 @@ namespace CarStatAppUI.MVVM.View
         {
             InitializeComponent();
             LoadDefaultsMostsFromDatabase();
-            
         }
 
         private void LoadDefaultsMostsFromDatabase()
         {
-
-            List<CarModel> models = SqliteDataAccess.GetMostEffCars();
+            models = SqliteDataAccess.GetMostEffCars();
 
             try
             {
@@ -36,6 +36,12 @@ namespace CarStatAppUI.MVVM.View
                 LongestRange.Content = $"Car with the longest range:\n {models[1].Brand} {models[1].CarType}\n Range: {models[1].RangeAdac} km";
                 BiggestTrunk.Content = $"Car with the biggest trunk:\n {models[2].Brand} {models[2].CarType}\n Trunk volume: {models[2].TrunkAdac} l";
                 BestEco.Content = $"Most fuel-efficient car:\n {models[3].Brand} {models[3].CarType}\n Average consumption:\n {models[3].ConsumptionAdac} l/100km";
+
+                carQuietest = models[0];
+                carLongest = models[1];
+                carBiggest = models[2];
+                carEco = models[3];
+
             }
             catch
             {

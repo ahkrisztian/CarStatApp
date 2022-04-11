@@ -31,7 +31,7 @@ namespace CarStatAppxUnit.Mocks
                 MaxSpeed = 192,
                 RangeAdac = 678,
                 Torque = 165,
-                Transmission = "Manual",
+                TypeTransmission = "Manual",
                 TrunkAdac = 378,
                 TrunkProducer = 422,
                 Weight = 1250               
@@ -54,7 +54,7 @@ namespace CarStatAppxUnit.Mocks
                 MaxSpeed = 210,
                 RangeAdac = 755,
                 Torque = 255,
-                Transmission = "Automatic",
+                TypeTransmission = "Automatic",
                 TrunkAdac = 411,
                 TrunkProducer = 479,
                 Weight = 1433
@@ -77,7 +77,7 @@ namespace CarStatAppxUnit.Mocks
                 MaxSpeed = 256,
                 RangeAdac = 578,
                 Torque = 365,
-                Transmission = "Manual",
+                TypeTransmission = "Manual",
                 TrunkAdac = 245,
                 TrunkProducer = 291,
                 Weight = 1020

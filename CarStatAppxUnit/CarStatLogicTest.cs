@@ -37,7 +37,7 @@ namespace CarStatAppxUnit
                 MaxSpeed = 152,
                 RangeAdac = 544,
                 Torque = 98,
-                Transmission = "Manual",
+                TypeTransmission = "Manual",
                 TrunkAdac = 321,
                 TrunkProducer = 382,
                 Weight = 980

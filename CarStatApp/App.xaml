@@ -20,12 +20,16 @@
                 <view:MainView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:FilterViewModel}">
-                <view:FilterView/>
+            <DataTemplate DataType="{x:Type viewModel:RecommendViewModel}">
+                <view:RecommendView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:UploadViewModel}">
                 <view:UploadView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:FilterResultViewModel}">
+                <view:FilterResultView/>
             </DataTemplate>
 
             <ControlTemplate x:Key="errorTemplate">

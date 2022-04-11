@@ -72,13 +72,8 @@
                            FontSize="15"/>
             </Grid>
 
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10"
+            <ContentControl Grid.Row="1" Grid.Column="1" Margin="10"
                             Content="{Binding CurrentView}"/>
-            
-            
-
         </Grid>
     </Border>
 

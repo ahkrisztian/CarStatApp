@@ -1,4 +1,5 @@
-﻿using CarStatAppUI.Core;
+﻿using CarStatAppLibrary.Models;
+using CarStatAppUI.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

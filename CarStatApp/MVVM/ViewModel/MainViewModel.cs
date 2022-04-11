@@ -27,11 +27,13 @@ namespace CarStatAppUI.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand FilterViewCommand { get; set; }
         public RelayCommand UploadViewCommand { get; set; }
+        public RelayCommand ResultViewCommand { get; set; }
 
-        public FilterViewModel FilterVM { get; set; }
+        public RecommendViewModel FilterVM { get; set; }
         public HomeViewModel HomeVM { get; set; }
 
         public UploadViewModel UploadVM { get; set; }
+        public FilterResultViewModel FilterResultVM { get; set; }
 
         private object _currentView;
 
@@ -50,9 +52,11 @@ namespace CarStatAppUI.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel();
 
-            FilterVM = new FilterViewModel();
+            FilterVM = new RecommendViewModel();
 
             UploadVM = new UploadViewModel();
+
+            FilterResultVM = new FilterResultViewModel();
 
             CurrentView = HomeVM;
 
@@ -70,6 +74,11 @@ namespace CarStatAppUI.MVVM.ViewModel
             UploadViewCommand = new RelayCommand(o =>
             {
                 CurrentView = UploadVM;
+            });
+
+            ResultViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = FilterResultVM;
             });
         }
 
