@@ -26,7 +26,7 @@ namespace CarStatAppUI.MVVM.View
     /// </summary>
     public partial class RecommendView : UserControl
     {
-        List<CarModel> recommCars = new List<CarModel>(SqliteDataAccess.GetFilteredCarModel(66, 5, 500, 200));
+        List<CarModel> recommCars = new List<CarModel> { };
         public RecommendView()
         {
             InitializeComponent(); 
@@ -34,16 +34,37 @@ namespace CarStatAppUI.MVVM.View
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
-        {                  
-            ModelsComboBox.ItemsSource = recommCars;
-            ModelsComboBox.DisplayMemberPath = $"DisplayValue";
-            ModelsComboBox.SelectedValuePath = "carId";
+        {
+            int range;
+            int trunk;
+            decimal noise;
+            decimal cons;
 
-            RecommGrid.Visibility = Visibility.Collapsed;
-            ResultGrid.Visibility = Visibility.Visible;
+            int.TryParse(RangeBox.Text, out range);
+            int.TryParse(TrunkBox.Text, out trunk);
+            decimal.TryParse(ConsBox.Text, out cons);
+            decimal.TryParse(noiseTextBox.Text, out noise);
+            
+            if(RecommFormValidation(range, trunk, noise, cons))
+            {
+                recommCars = SqliteDataAccess.GetFilteredCarModel(noise, cons, range, trunk);
 
-            
-            
+                if(recommCars.Count > 0)
+                {
+                    ModelsComboBox.ItemsSource = recommCars;
+                    ModelsComboBox.DisplayMemberPath = $"DisplayValue";
+                    ModelsComboBox.SelectedValuePath = "carId";
+
+                    RecommGrid.Visibility = Visibility.Collapsed;
+                    ResultGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("No results.");
+                }
+            }
+
+            MessageBox.Show("Please, check the text boxes.");
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -69,6 +90,56 @@ namespace CarStatAppUI.MVVM.View
             {
                 RecommTextBlock.Text = "";
             }
+        }
+
+        private bool RecommFormValidation(int range, int trunk, decimal noise, decimal cons )
+        {
+            bool output = false;
+
+            try
+            {
+                //Load a car with a minimum interior noise level
+                decimal MinNoise = SqliteDataAccess.GetMinNoise();
+
+                //Load a car with a maximum interior noise level
+                decimal MaxNoise = SqliteDataAccess.GetMaxNoise();
+
+                //Load car with the lowest consumption
+                decimal MinCons = SqliteDataAccess.GetMinConsumption();
+
+                //Load a car with a highest consumption
+
+                decimal MaxCons = SqliteDataAccess.GetMaxConsumption();
+
+                //Load a car with a minimum trunk volume
+
+                int MinTrunkValue = SqliteDataAccess.GetMinTrunk();
+
+                //Load a car with a maximum trunk volume
+
+                int MaxTrunkValue = SqliteDataAccess.GetMaxTrunk();
+
+                //Load a car with a minimum range
+
+                int MinRange = SqliteDataAccess.GetMinRange();
+
+                //Load a car with a maximum range
+
+                int MaxRange = SqliteDataAccess.GetMaxRange();
+
+                if ((range >= MinRange && range <= MaxRange) &&
+                    (trunk >= MinTrunkValue && trunk <= MaxTrunkValue) &&
+                    (noise >= Math.Floor(MinNoise) && noise <= Math.Ceiling(MaxNoise)) &&
+                    (cons >= Math.Floor(MinCons) && cons <= Math.Ceiling(MaxCons))) { output = true; }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+                return output;
+            }
+
+            return output;
         }
     }
 }

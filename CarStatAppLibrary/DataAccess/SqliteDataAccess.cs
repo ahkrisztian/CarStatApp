@@ -107,8 +107,8 @@ namespace CarStatAppLibrary.DataAccess
             string sqlFilter = @"SELECT * FROM Car 
                                  INNER JOIN Brands ON Car.CarBrand = Brands.id 
                                  INNER JOIN TransmissionType ON Car.Transmission = TransmissionType.id    
-                                 WHERE InteriorNoise > @InteriorNoise AND ConsumptionAdac > @ConsumptionAdac 
-                                 AND RangeAdac > @RangeAdac AND TrunkAdac > @TrunkAdac;";
+                                 WHERE InteriorNoise <= @InteriorNoise AND ConsumptionAdac < @ConsumptionAdac 
+                                 AND RangeAdac >= @RangeAdac AND TrunkAdac >= @TrunkAdac;";
 
             var data = LoadData<CarModel>(sqlFilter, parameters);
 

@@ -14,22 +14,6 @@ namespace CarStatAppUI.MVVM.ViewModel
     public class RecommendViewModel : ObservObj
     {
         
-        private static ObservableCollection<CarModel> _models { get; set; }
-
-        public ObservableCollection<CarModel> Models
-        {
-            get
-            {
-                return _models;
-            }
-            set
-            {
-                if (value == _models) return;
-                _models = value;
-                OnPropertyChanged();
-            }
-        }
-
         public RecommendViewModel()
         {
 

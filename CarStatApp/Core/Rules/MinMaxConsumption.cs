@@ -34,20 +34,20 @@ namespace CarStatAppUI.Core.Rules
 
                 maxCons = SqliteDataAccess.GetMaxConsumption();
 
-                if (Convert.ToInt32(value) < minCons)
+                if (Convert.ToDecimal(value) < Math.Floor(minCons))
                 {
-                    return new ValidationResult(false, $"Minimum consumption must be at least {minCons}.");
+                    return new ValidationResult(false, $"Minimum consumption must be at least {Math.Floor(minCons)}.");
                 }
 
-                if (Convert.ToInt32(value) > maxCons)
+                if (Convert.ToDecimal(value) > Math.Ceiling(maxCons))
                 {
-                    return new ValidationResult(false, $"Maximum consumption can't be over {maxCons}");
+                    return new ValidationResult(false, $"Maximum consumption can't be over {Math.Ceiling(maxCons)}");
                 }
             }
             catch (Exception)
             {
 
-                return new ValidationResult(false, $"Please enter a valid consumption");
+                return new ValidationResult(false, $"Please enter a valid consumption use a . separator");
             }
 
             return new ValidationResult(true, null);

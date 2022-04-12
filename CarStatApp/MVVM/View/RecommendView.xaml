@@ -6,9 +6,14 @@
              xmlns:local="clr-namespace:CarStatAppUI.MVVM.View"
              xmlns:rules="clr-namespace:CarStatAppUI.Core.Rules"
              xmlns:viewModel="clr-namespace:CarStatAppUI.MVVM.ViewModel"
+             xmlns:valid="clr-namespace:CarStatAppUI.Core.Rules"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
+    <UserControl.DataContext>
+        <viewModel:RecommendViewModel/>
+    </UserControl.DataContext>
+
     <Grid >
         <Grid x:Name="RecommGrid">
             <Grid.RowDefinitions>
@@ -56,19 +61,187 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left"
-                    VerticalAlignment="Center" Margin="0,50,0,0" Name="StackPanelTextBox">
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
-                     Style="{StaticResource NoiseTextBox}"
-                     Name="noiseTextBox"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
-                     Style="{StaticResource RangeTextBox}"
-                     Name="rangeTextBox"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
-                     Style="{StaticResource TrunkTextBox}"
-                     Name="trunkTextBox"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,20"   
-                     Style="{StaticResource MaxConsTextBox}"
-                     Name="consTextBox"/>
+                        VerticalAlignment="Center" Margin="0,50,0,0" Name="StackPanelTextBox">
+                <Border CornerRadius="10"
+                        Background="#F0A500"
+                        Width="350" Height="40"
+                        Name="NoiseBorder"
+                        Margin="0,0,0,20">
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                        <TextBox Margin="1"                                 
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="noiseTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                            <TextBox.Text>
+                                <Binding Path="InteriorNoise" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <valid:MinMaxNoiseRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False"
+                                       Text="Min. Noise"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=noiseTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="10"
+                        Background="#F0A500"
+                        Width="350" Height="40"
+                        Name="RangeBorder"
+                        Margin="0,0,0,20">
+
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                        <TextBox Margin="1"                                 
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="RangeBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                            <TextBox.Text>
+                                <Binding Path="RangeAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <valid:MinMaxRange/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBlock IsHitTestVisible="False"
+                                       Text="Min. Range"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1"
+                                       Name="RangeTextBlock">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=RangeBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="10"
+                        Background="#F0A500"
+                        Width="350" Height="40"
+                        Name="TrunkBorder"
+                        Margin="0,0,0,20">
+
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                        <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="TrunkBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                            <TextBox.Text>
+                                <Binding Path="TrankAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <valid:MinMaxTrunk/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBlock IsHitTestVisible="False"
+                                       Text="Min. Trunk Volume"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=TrunkBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="10"
+                            Background="#F0A500"
+                            Width="350" Height="40"
+                        Name="ConsBorder"
+                        Margin="0,0,0,20">
+
+                    <Grid>
+                        <Rectangle StrokeThickness="1"/>
+                        <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="ConsBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                            <TextBox.Text>
+                                <Binding Path="ConsumptionAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <valid:MinMaxConsumption/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+
+                        <TextBlock IsHitTestVisible="False"
+                                       Text="Max. Consumption"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=ConsBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Border>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.ColumnSpan="2"

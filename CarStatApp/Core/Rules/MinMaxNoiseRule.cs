@@ -25,20 +25,20 @@ namespace CarStatAppUI.Core.Rules
                 //Load a car with a maximum interior noise level
                 MaxNoise = SqliteDataAccess.GetMaxNoise();
 
-                if (Convert.ToInt32(value) < MinNoise)
+                if (Convert.ToDecimal(value) < Math.Floor(MinNoise))
                 {
-                    return new ValidationResult(false, $"Noise can't be lower than {MinNoise}");
+                    return new ValidationResult(false, $"Noise can't be lower than {Math.Floor(MinNoise)}");
                 }
 
-                if (Convert.ToInt32(value) > MaxNoise)
+                if (Convert.ToDecimal(value) > Math.Ceiling(MaxNoise))
                 {
-                    return new ValidationResult(false, $"Noise can't be higher than {MaxNoise}");
+                    return new ValidationResult(false, $"Noise can't be higher than {Math.Ceiling(MaxNoise)}");
                 }
             }
             catch (Exception)
             {
 
-                return new ValidationResult(false, $"Please enter a valid noise level");
+                return new ValidationResult(false, $"Please enter a valid noise level or use a . separator");
             }
 
             return new ValidationResult(true, null);
