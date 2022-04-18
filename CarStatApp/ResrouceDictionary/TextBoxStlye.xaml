@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:valid="clr-namespace:CarStatAppUI.Core.Rules"
-                    xmlns:y="clr-namespace:CarStatAppUI.MVVM.ViewModel">
+                    xmlns:y="clr-namespace:CarStatAppUI.MVVM.ViewModel"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyleBrand">
         <Setter Property="Template">
@@ -26,7 +27,8 @@
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"
                                        Foreground="#4A3933"
-                                       Grid.Column="1">
+                                       Grid.Column="1"
+                                       Name="BrandTextBlock">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
@@ -895,7 +897,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 
 </ResourceDictionary>

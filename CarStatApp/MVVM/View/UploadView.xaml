@@ -4,12 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CarStatAppUI.MVVM.View"
+             xmlns:valid="clr-namespace:CarStatAppUI.Core.Rules"
+             xmlns:viewModel="clr-namespace:CarStatAppUI.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="525" d:DesignWidth="900">
 
+    <UserControl.DataContext>
+        <viewModel:UploadViewModel/>
+    </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
@@ -21,118 +26,713 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,20"/>
 
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" Orientation="Horizontal">
-            <TextBox Style="{StaticResource TextBoxStyleBrand}"
-                     Name="brandTextBox"
-                     TextAlignment="Left" HorizontalAlignment="Center"
-                     Margin="0 0 50 0"
-                     />
+        <Border Grid.Row="1" Width="650" Height="400" 
+                Background="#2e231f" 
+                CornerRadius="10">
 
-            <TextBox Style="{StaticResource TextBoxStyleType}"
+
+        </Border>
+
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" Margin="160,0,0,0" 
+                    VerticalAlignment="Center" Orientation="Horizontal">
+            <Grid>
+                <StackPanel Orientation="Vertical">
+
+                    <ComboBox Style="{DynamicResource ComboBoxStyle1}"
+                              Name="brandComboBox"
+                              Height="30"
+                              Margin="0,10,0,0"
+                              Padding="10,6,5,5" Foreground="#FF4A3933"
+                              ItemsSource="{Binding BrandsView}" DisplayMemberPath="Brand">
+                    </ComboBox>
+
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="88*"/>
+                                <ColumnDefinition Width="37*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle StrokeThickness="1" Grid.ColumnSpan="2"/>
+                            <TextBox Margin="1,0,1,0"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="horseTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}" Grid.ColumnSpan="2">
+                                <TextBox.Text>
+                                    <Binding Path="HorsePower" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay" NotifyOnValidationError="True">
+                                        <Binding.ValidationRules >
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Horsepower"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=horseTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                            Background="#F0A500"
+                            Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="torqueTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Torque" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Torque"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=torqueTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+
+                    <ComboBox Style="{DynamicResource ComboBoxStyle1}"
+                              Name="transmissionComboBox"
+                              Height="30"
+                              Margin="0,10,0,0"
+                              Padding="10,6,5,5" Foreground="#FF4A3933"
+                              ItemsSource="{Binding TransmissionView}" DisplayMemberPath="TypeTransmission">
+                    </ComboBox>
+
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="maxSpeedTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="MaxSpeed" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Max. Speed"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=maxSpeedTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="nulltohundredTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="NullHundred" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="0-100"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=nulltohundredTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="trunkProdTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TrunkCapProd" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Trank Cap. Prod."
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=trunkProdTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="trunkAdacTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TrunkCapAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Trunk Cap. ADAC"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=trunkAdacTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="noiseTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="IntNoise" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Interior Noise"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=noiseTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,160,0"
+                    VerticalAlignment="Center" Orientation="Horizontal">
+            <Grid>
+                <StackPanel Orientation="Vertical">
+
+                    <TextBox Style="{StaticResource TextBoxStyleType}"
                      Name="typeTextBox"
-                     TextAlignment="Left" HorizontalAlignment="Center"/>
-        </StackPanel>
+                     TextAlignment="Left" HorizontalAlignment="Center"
+                             Margin="0,5,0,0"/>
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="160,0,0,0" 
-                    VerticalAlignment="Center" Orientation="Horizontal">
-            <Border Width="260" Height="350" Background="#2e231f" CornerRadius="10">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <TextBox Style="{StaticResource TextBoxHorsePower}"
-                                 HorizontalAlignment="Center"
-                                 Name="horseTextBox"
-                                 Margin="0,20,0,10" />
-                        <TextBox Style="{StaticResource TextBoxTorque}"
-                                 HorizontalAlignment="Center"
-                                 Name="torqueTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleTransmission}"
-                                 HorizontalAlignment="Center"
-                                 Name="transmissionTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxMaxSpeed}"
-                                 HorizontalAlignment="Center"
-                                 Name="maxSpeedTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleNullToHundred}"
-                                 HorizontalAlignment="Center"
-                                 Name="nulltohundredTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleTrankProducer}"
-                                 HorizontalAlignment="Center"
-                                 Name="trunkProdTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleTrankAdac}"
-                                 HorizontalAlignment="Center"
-                                 Name="trunkAdacTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleInteriorNoise}"
-                                 HorizontalAlignment="Center"
-                                 Name="noiseTextBox"
-                                 Margin="0,0,0,10"/>
-                    </StackPanel>
-                </Grid>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
 
-            </Border>
-        </StackPanel>
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="tankCapTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="TankCap" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Tank Capacity"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=tankCapTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,160,0"
-                    VerticalAlignment="Center" Orientation="Horizontal">
-            <Border Width="260" Height="350" Background="#2e231f" CornerRadius="10">
-                <Grid>
-                    <StackPanel Orientation="Vertical">
-                        <TextBox Style="{StaticResource TextBoxStyleTankCapacity}"
-                                 HorizontalAlignment="Center"
-                                 Name="tankCapTextBox"
-                                 Margin="0,20,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleConsumptionProducer}"
-                                 HorizontalAlignment="Center"
-                                 Name="consProdTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleConsumptionAdac}"
-                                 HorizontalAlignment="Center"
-                                 Name="consAdacTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleConsumptionCity}"
-                                 HorizontalAlignment="Center"
-                                 Name="consCityTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleConsumptionCountryRoad}"
-                                 HorizontalAlignment="Center"
-                                 Name="consCountryTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleConsumptionHighWay}"
-                                 HorizontalAlignment="Center"
-                                 Name="consHighWayTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleRangeAdac}"
-                                 HorizontalAlignment="Center"
-                                 Name="rangeTextBox"
-                                 Margin="0,0,0,10"/>
-                        <TextBox Style="{StaticResource TextBoxStyleWeight}"
-                                 HorizontalAlignment="Center"
-                                 Name="weightTextBox"
-                                 Margin="0,0,0,10"/>
-                    </StackPanel>
-                </Grid>
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="consProdTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsProd" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Consumption Producer"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=consProdTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
 
-            </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="consAdacTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Consumption ADAC"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=consAdacTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="consCityTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsCity" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Consumption City"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=consCityTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="consCountryTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsCountry" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Consumption CountryRoad"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=consCountryTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="consHighWayTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="ConsHighWay" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Consumption HighWay"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=consHighWayTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="rangeTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="RangeAdac" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Range ADAC"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=rangeTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                    <Border CornerRadius="10"
+                                Background="#F0A500"
+                                Width="250" Height="30"
+                                Margin="0,10,0,0">
+
+                        <Grid>
+                            <Rectangle StrokeThickness="1"/>
+                            <TextBox Margin="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 Padding="5"
+                                 Foreground="#4A3933"
+                                 x:Name="weightTextBox"
+                                 Validation.ErrorTemplate="{DynamicResource errorTemplate}">
+                                <TextBox.Text>
+                                    <Binding Path="Weight" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <valid:textRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <TextBlock IsHitTestVisible="False"
+                                       Text="Weight"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="10,0,0,0"
+                                       Foreground="#4A3933"
+                                       Grid.Column="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=weightTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" 
                     VerticalAlignment="Center" Orientation="Horizontal">
-
-
-        </StackPanel>
-
-        <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
+            <Button Style="{StaticResource ButtonStyle}" x:Name="Upload"
                      Click="Upload_Click"
                      Grid.Row="3"
                      Width="100"
+                     Height="40"
                      Margin="0,0,0,0"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Center">Upload
-        </Button>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

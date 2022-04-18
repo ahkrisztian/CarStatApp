@@ -32,7 +32,7 @@ namespace CarStatAppxUnit
                 TankCapacity = 36,
                 HorsePower = 71,
                 NullToHundred = 12.45M,
-                Id = 4,
+                carId = 4,
                 InteriorNoise = 72.75M,
                 MaxSpeed = 152,
                 RangeAdac = 544,

@@ -24,6 +24,7 @@ namespace CarStatAppUI.MVVM.View
     /// </summary>
     public partial class UploadView : UserControl
     {        
+
         public UploadView()
         {
             InitializeComponent();           
@@ -37,11 +38,14 @@ namespace CarStatAppUI.MVVM.View
 
             try
             {
-                model.Brand = brandTextBox.Text;
+                var brand = (BrandModel)brandComboBox.SelectedItem;
+                var trans = (TransmissionModel)transmissionComboBox.SelectedItem;
+
+                model.Brand = brand.id.ToString();
                 model.CarType = typeTextBox.Text;
                 model.HorsePower = int.Parse(horseTextBox.Text);
                 model.Torque = int.Parse(torqueTextBox.Text);
-                model.TypeTransmission = transmissionTextBox.Text;
+                model.TypeTransmission = trans.id.ToString();
                 model.MaxSpeed = Convert.ToInt32(maxSpeedTextBox.Text);
                 model.NullToHundred = Convert.ToDecimal(nulltohundredTextBox.Text);
                 model.TrunkProducer = Convert.ToInt32(trunkProdTextBox.Text);
@@ -78,6 +82,7 @@ namespace CarStatAppUI.MVVM.View
                 MessageBox.Show("The form is not valid.");
                 return;
             }
+
         }
     }
 }

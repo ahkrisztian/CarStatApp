@@ -63,8 +63,10 @@ namespace CarStatAppUI.MVVM.View
                     MessageBox.Show("No results.");
                 }
             }
-
-            MessageBox.Show("Please, check the text boxes.");
+            else
+            {
+                MessageBox.Show("Please, check the text boxes.");
+            }            
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)

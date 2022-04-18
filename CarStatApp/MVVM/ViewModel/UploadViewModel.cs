@@ -1,20 +1,42 @@
-﻿using CarStatAppUI.Core;
+﻿using CarStatAppLibrary.DataAccess;
+using CarStatAppLibrary.Models;
+using CarStatAppUI.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace CarStatAppUI.MVVM.ViewModel
 {
     public class UploadViewModel : ObservObj
     {
+        public ListCollectionView BrandsView { get;}
+        private ObservableCollection<BrandModel> Brands
+        {
+            get; set;
+        }
+
+        public ListCollectionView TransmissionView
+        {
+            get;
+        }
+        private ObservableCollection<TransmissionModel> Transmissions
+        {
+            get; set;
+        }
 
         public UploadViewModel()
         {
+            Brands = new ObservableCollection<BrandModel>(SqliteDataAccess.CarInventory_GetBrands());
+            BrandsView = CollectionViewSource.GetDefaultView(Brands) as ListCollectionView;
 
+            Transmissions = new ObservableCollection<TransmissionModel>(SqliteDataAccess.CarInventory_GetTransmissions());
+            TransmissionView = CollectionViewSource.GetDefaultView(Transmissions) as ListCollectionView;
         }
 
 
