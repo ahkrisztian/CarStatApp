@@ -86,7 +86,7 @@
                             </TextBox.Text>
                         </TextBox>
                         <TextBlock IsHitTestVisible="False"
-                                       Text="Min. Noise"
+                                       Text="Max. Noise"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="10,0,0,0"

@@ -15,6 +15,38 @@ namespace CarStatAppUI.MVVM.ViewModel
 {
     public class UploadViewModel : ObservObj
     {
+
+        public RelayCommand HomeViewCommand
+        {
+            get; set;
+        }
+
+        public UploadViewModel UploadVM
+        {
+            get; set;
+        }
+
+        public HomeViewModel HomeVM
+        {
+            get; set;
+        }
+
+        private object _currentView;
+
+        public object CurrentView
+        {
+            get
+            {
+                return _currentView;
+            }
+            set
+            {
+                _currentView = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public ListCollectionView BrandsView { get;}
         private ObservableCollection<BrandModel> Brands
         {
@@ -37,6 +69,15 @@ namespace CarStatAppUI.MVVM.ViewModel
 
             Transmissions = new ObservableCollection<TransmissionModel>(SqliteDataAccess.CarInventory_GetTransmissions());
             TransmissionView = CollectionViewSource.GetDefaultView(Transmissions) as ListCollectionView;
+
+            HomeVM = new HomeViewModel();
+
+            CurrentView = UploadVM;
+
+            HomeViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = HomeVM;
+            });
         }
 
 
